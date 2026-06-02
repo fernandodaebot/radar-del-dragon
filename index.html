@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>Radar del Dragón</title>
@@ -11,42 +12,41 @@
 
 <p>Versión de prueba</p>
 
-<input id="jugador" placeholder="Tu nombre">
+<input id="jugador" type="text" placeholder="Tu nombre">
 
 <br><br>
 
-<input id="codigo" placeholder="Código encontrado">
+<input id="codigo" type="text" placeholder="Código encontrado">
 
 <br><br>
 
-<button onclick="validarCodigo()">
-VALIDAR
-</button>
+<button onclick="validarCodigo()">VALIDAR</button>
 
-<p id="resultado"></p>
+<br><br>
+
+<div id="resultado"></div>
 
 <script>
 
-function validarCodigo(){
+function validarCodigo() {
 
-let codigo =
-document.getElementById("codigo").value;
+    let codigo = document.getElementById("codigo").value;
 
-if(
-codigo === "DRAGON001" ||
-codigo === "DRAGON002" ||
-codigo === "DRAGON003"
-){
+    if (
+        codigo === "DRAGON001" ||
+        codigo === "DRAGON002" ||
+        codigo === "DRAGON003"
+    ) {
 
-document.getElementById("resultado").innerHTML =
-"🎉 Código válido";
+        document.getElementById("resultado").innerHTML =
+            "🎉 Código válido";
 
-}else{
+    } else {
 
-document.getElementById("resultado").innerHTML =
-"❌ Código incorrecto";
+        document.getElementById("resultado").innerHTML =
+            "❌ Código incorrecto";
 
-}
+    }
 
 }
 
