@@ -154,27 +154,6 @@ function validarManual() {
   });
 
 }
-    method: "POST",
-    body: JSON.stringify({
-      accion: "validar",
-      nombre: nombre,
-      celular: "web",
-      codigo: codigo
-    })
-  })
-  .then(res => res.json())
-  .then(resp => {
-
-    if (resp.estado === "ok") {
-      map.removeLayer(marcadores[codigo]);
-      alert("🎉 +" + resp.puntos + " puntos");
-    } else {
-      alert("❌ Error o ya usada");
-    }
-
-  });
-
-};
 
 cargarEntradas();
 
