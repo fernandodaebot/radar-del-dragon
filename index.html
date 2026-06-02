@@ -14,6 +14,14 @@ body {
   text-align: center;
 }
 
+.titulo {
+  font-size: 42px;
+  color: gold;
+  text-shadow: 0 0 10px red;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
 #map {
   height: 600px;
   width: 95%;
@@ -45,7 +53,8 @@ button {
 button:hover {
   background: darkred;
 }
-  .paneles {
+
+.paneles {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -60,10 +69,11 @@ button:hover {
 
 .ranking-panel {
   background: #222;
-  border: 2px solid gold;
-  border-radius: 10px;
-  padding: 10px;
-  min-height: 250px;
+  border: 3px solid gold;
+  border-radius: 15px;
+  padding: 15px;
+  min-height: 300px;
+  box-shadow: 0 0 15px gold;
 }
 
 .ranking-panel h2 {
@@ -72,7 +82,9 @@ button:hover {
 
 .patrocinio img {
   width: 220px;
-  border-radius: 10px;
+  border-radius: 15px;
+  border: 3px solid gold;
+  box-shadow: 0 0 15px red;
 }
 
 </style>
@@ -83,7 +95,9 @@ button:hover {
 
 <body>
 
-<h2>🐉 RADAR DEL DRAGÓN POR FERNANDO DAEBOT 🐉</h2>
+<h1 class="titulo">
+🐉 RADAR DEL DRAGÓN POR FERNANDO DAEBOT 🐉
+</h1>
 
 <div class="paneles">
 
@@ -115,7 +129,7 @@ button:hover {
     <br>
 
     <button onclick="validarManual()">
-    Validar Código
+      Validar Código
     </button>
 
   </div>
@@ -125,14 +139,14 @@ button:hover {
     <h2>🏆 TOP JUGADORES</h2>
 
     <div id="ranking">
-
       Próximamente...
-
     </div>
 
   </div>
 
-</div><div id="map"></div>
+</div>
+
+<div id="map"></div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -140,31 +154,44 @@ button:hover {
 
 window.onload = function() {
 
-let map = L.map('map').setView([-17.9833, -67.1500], 13);
+  let map = L.map('map').setView([-17.9833, -67.1500], 13);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19
-}).addTo(map);
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      maxZoom: 19
+    }
+  ).addTo(map);
 
-let marcadores = {};
+  let marcadores = {};
 
-function cargarEntradas() {
+  function cargarEntradas() {
 
-  fetch("https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=listar")
+    fetch(
+      "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=listar"
+    )
+
     .then(res => res.json())
+
     .then(data => {
 
       data.forEach(ent => {
 
         let clownIcon = L.divIcon({
-          html: "<div style='font-size:40px;'>🎪</div>",
+          html:
+          "<div style='font-size:40px;'>🎪</div>",
           className: "emoji-marker",
-          iconSize: [60, 60]
+          iconSize: [60,60]
         });
 
         let marker = L.marker(
-          [parseFloat(ent.latitud), parseFloat(ent.longitud)],
-          { icon: clownIcon }
+          [
+            parseFloat(ent.latitud),
+            parseFloat(ent.longitud)
+          ],
+          {
+            icon: clownIcon
+          }
         ).addTo(map);
 
         marker.bindPopup(`
@@ -179,75 +206,77 @@ function cargarEntradas() {
 
     });
 
-}
+  }
 
-window.validarManual = function() {
+  window.validarManual = function() {
 
-  let nombre =
-  document.getElementById("jugador").value;
+    let nombre =
+    document.getElementById("jugador").value;
 
-  let codigo =
-  document.getElementById("codigoManual").value;
+    let codigo =
+    document.getElementById("codigoManual").value;
 
-  let celular =
-  document.getElementById("celular").value;
+    let celular =
+    document.getElementById("celular").value;
 
-  fetch("https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec", {
+    fetch(
+      "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec",
+      {
+        method: "POST",
 
-    method: "POST",
+        body: JSON.stringify({
 
-    body: JSON.stringify({
+          accion: "validar",
+          nombre: nombre,
+          celular: celular,
+          codigo: codigo
 
-      accion: "validar",
-      nombre: nombre,
-      celular: celular,
-      codigo: codigo
+        })
 
-    })
+      }
+    )
 
-  })
+    .then(res => res.json())
 
-  .then(res => res.json())
+    .then(resp => {
 
-  .then(resp => {
+      if (resp.estado === "ok") {
 
-    if (resp.estado === "ok") {
+        if (marcadores[codigo]) {
 
-      if (marcadores[codigo]) {
+          map.removeLayer(
+            marcadores[codigo]
+          );
 
-        map.removeLayer(
-          marcadores[codigo]
+        }
+
+        alert(
+          "🎉 +" +
+          resp.puntos +
+          " puntos"
+        );
+
+      } else {
+
+        alert(
+          "❌ Código inválido o ya usado"
         );
 
       }
 
-      alert(
-        "🎉 +" +
-        resp.puntos +
-        " puntos"
-      );
+    })
 
-    } else {
+    .catch(error => {
 
       alert(
-        "❌ Código inválido o ya usado"
+        "ERROR: " + error
       );
 
-    }
+    });
 
-  })
+  }
 
-  .catch(error => {
-
-    alert(
-      "ERROR: " + error
-    );
-
-  });
-
-}
-
-cargarEntradas();
+  cargarEntradas();
 
 };
 
