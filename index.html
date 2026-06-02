@@ -54,7 +54,7 @@ button:hover {
 
 <body>
 
-<h2>RADAR DEL DRAGÓN POR FERNANDO DAEBOT</h2>
+<h2>RADAR DEL DRAGÓN DE FERNANDO DAEBOT</h2>
 
 <input
 id="jugador"
@@ -161,6 +161,8 @@ window.validarManual = function() {
 
   .then(resp => {
 
+    alert(JSON.stringify(resp));
+
     if (resp.estado === "ok") {
 
       if (marcadores[codigo]) {
@@ -184,6 +186,14 @@ window.validarManual = function() {
       );
 
     }
+
+  })
+
+  .catch(error => {
+
+    alert(
+      "ERROR: " + error
+    );
 
   });
 
