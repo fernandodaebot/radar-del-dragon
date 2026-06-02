@@ -4,23 +4,53 @@
 <meta charset="UTF-8">
 <title>Radar del Dragón</title>
 </head>
+
 <body>
 
 <h1>🐉 RADAR DEL DRAGÓN</h1>
 
-<p>Versión de prueba funcionando</p>
+<p>Versión de prueba</p>
 
-<label>Jugador:</label>
-<input type="text">
-
-<br><br>
-
-<label>Código:</label>
-<input type="text">
+<input id="jugador" placeholder="Tu nombre">
 
 <br><br>
 
-<button>VALIDAR</button>
+<input id="codigo" placeholder="Código encontrado">
+
+<br><br>
+
+<button onclick="validarCodigo()">
+VALIDAR
+</button>
+
+<p id="resultado"></p>
+
+<script>
+
+function validarCodigo(){
+
+let codigo =
+document.getElementById("codigo").value;
+
+if(
+codigo === "DRAGON001" ||
+codigo === "DRAGON002" ||
+codigo === "DRAGON003"
+){
+
+document.getElementById("resultado").innerHTML =
+"🎉 Código válido";
+
+}else{
+
+document.getElementById("resultado").innerHTML =
+"❌ Código incorrecto";
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
