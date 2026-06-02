@@ -29,6 +29,45 @@
 
 function validarCodigo() {
 
+    let codigo =
+    document.getElementById("codigo").value;
+
+    if(codigo === "DRAGON001"){
+
+        document.getElementById("resultado").innerHTML =
+        "🎉 Encontraste la Esfera 1";
+
+        document.getElementById("esferas").innerHTML =
+        "🟠 DRAGON002<br>🟠 DRAGON003";
+
+    }
+    else if(codigo === "DRAGON002"){
+
+        document.getElementById("resultado").innerHTML =
+        "🎉 Encontraste la Esfera 2";
+
+        document.getElementById("esferas").innerHTML =
+        "🟠 DRAGON001<br>🟠 DRAGON003";
+
+    }
+    else if(codigo === "DRAGON003"){
+
+        document.getElementById("resultado").innerHTML =
+        "🎉 Encontraste la Esfera 3";
+
+        document.getElementById("esferas").innerHTML =
+        "🟠 DRAGON001<br>🟠 DRAGON002";
+
+    }
+    else{
+
+        document.getElementById("resultado").innerHTML =
+        "❌ Código incorrecto";
+
+    }
+
+}
+
     let codigo = document.getElementById("codigo").value;
 
     if (
