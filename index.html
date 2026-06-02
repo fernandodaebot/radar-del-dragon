@@ -32,6 +32,18 @@ body {
 
 <h2>RADAR DEL DRAGÓN DE FERNANDO DAEBOT</h2>
 
+<input
+id="jugador"
+placeholder="Tu nombre">
+
+<input
+id="codigoManual"
+placeholder="Código encontrado">
+
+<button onclick="validarManual()">
+Validar Código
+</button>
+
 <div id="map"></div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -88,11 +100,60 @@ let marker = L.marker(
 
 }
 
-window.abrirValidacion = function(codigo) {
+function validarManual() {
 
-  let nombre = document.getElementById("jugador")?.value || "web";
+  let nombre =
+  document.getElementById("jugador").value;
+
+  let codigo =
+  document.getElementById("codigoManual").value;
 
   fetch("https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec", {
+
+    method: "POST",
+
+    body: JSON.stringify({
+
+      accion: "validar",
+      nombre: nombre,
+      celular: "web",
+      codigo: codigo
+
+    })
+
+  })
+
+  .then(res => res.json())
+
+  .then(resp => {
+
+    if (resp.estado === "ok") {
+
+      if (marcadores[codigo]) {
+
+        map.removeLayer(
+          marcadores[codigo]
+        );
+
+      }
+
+      alert(
+        "🎉 +" +
+        resp.puntos +
+        " puntos"
+      );
+
+    } else {
+
+      alert(
+        "❌ Código inválido"
+      );
+
+    }
+
+  });
+
+}
     method: "POST",
     body: JSON.stringify({
       accion: "validar",
