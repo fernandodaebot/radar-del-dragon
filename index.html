@@ -45,6 +45,35 @@ button {
 button:hover {
   background: darkred;
 }
+  .paneles {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.patrocinio,
+.ranking-panel {
+  width: 250px;
+}
+
+.ranking-panel {
+  background: #222;
+  border: 2px solid gold;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 250px;
+}
+
+.ranking-panel h2 {
+  color: gold;
+}
+
+.patrocinio img {
+  width: 220px;
+  border-radius: 10px;
+}
 
 </style>
 
@@ -54,33 +83,56 @@ button:hover {
 
 <body>
 
-<h2>RADAR DEL DRAGÓN POR FERNANDO DAEBOT</h2>
+<h2>🐉 RADAR DEL DRAGÓN POR FERNANDO DAEBOT 🐉</h2>
 
-<input
-id="jugador"
-placeholder="Tu nombre">
+<div class="paneles">
 
-<br>
+  <div class="patrocinio">
 
-<input
-id="celular"
-placeholder="Celular">
+    <img
+    src="https://wallpapers.com/images/featured/dragon-radar-1x8sy1stb5gow51j.jpg">
 
-<br>
+  </div>
 
-<input
-id="codigoManual"
-placeholder="Código encontrado">
+  <div>
 
-<br>
+    <input
+    id="jugador"
+    placeholder="Tu nombre">
 
-<button onclick="validarManual()">
-Validar Código
-</button>
+    <br>
 
-<br><br>
+    <input
+    id="celular"
+    placeholder="Celular">
 
-<div id="map"></div>
+    <br>
+
+    <input
+    id="codigoManual"
+    placeholder="Código encontrado">
+
+    <br>
+
+    <button onclick="validarManual()">
+    Validar Código
+    </button>
+
+  </div>
+
+  <div class="ranking-panel">
+
+    <h2>🏆 TOP JUGADORES</h2>
+
+    <div id="ranking">
+
+      Próximamente...
+
+    </div>
+
+  </div>
+
+</div><div id="map"></div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
