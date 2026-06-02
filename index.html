@@ -56,7 +56,16 @@ function cargarEntradas() {
 
       data.forEach(ent => {
 
-        let marker = L.marker([ent.latitud, ent.longitud]).addTo(map);
+        let carpaIcon = L.icon({
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/619/619034.png",
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
+
+let marker = L.marker(
+  [ent.latitud, ent.longitud],
+  { icon: carpaIcon }
+).addTo(map);
 
         marker.bindPopup(`
           <h3>🎪 ${ent.nombre}</h3>
