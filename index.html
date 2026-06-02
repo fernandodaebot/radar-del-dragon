@@ -1,87 +1,74 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+
 <meta charset="UTF-8">
+
 <title>Radar del Dragón</title>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+}
+
+#map{
+height:600px;
+width:100%;
+}
+
+</style>
+
 </head>
 
 <body>
 
 <h1>🐉 RADAR DEL DRAGÓN EN LA VIDA REAL POR FERNANDO DAEBOT 🐉</h1>
 
-<h2>🐉 ESFERAS ACTIVAS</h2>
+<div id="map"></div>
 
-<div id="esferas">
-🟠 DRAGON001<br>
-🟠 DRAGON002<br>
-🟠 DRAGON003
-</div>
-
-<br><br>
-
-<input id="jugador" type="text" placeholder="Tu nombre">
-
-<br><br>
-
-<input id="codigo" type="text" placeholder="Código encontrado">
-
-<br><br>
-
-<button onclick="validarCodigo()">VALIDAR</button>
-
-<br><br>
-
-<div id="resultado"></div>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
 
-function validarCodigo() {
+var map = L.map('map').setView(
+[-17.9833,-67.1500],
+13
+);
 
-    let codigo =
-    document.getElementById("codigo").value;
-
-    if(codigo === "DRAGON001"){
-
-        document.getElementById("resultado").innerHTML =
-        "🎉 Encontraste la Esfera 1";
-
-        document.getElementById("esferas").innerHTML =
-        "🟠 DRAGON002<br>🟠 DRAGON003";
-
-    }
-
-    else if(codigo === "DRAGON002"){
-
-        document.getElementById("resultado").innerHTML =
-        "🎉 Encontraste la Esfera 2";
-
-        document.getElementById("esferas").innerHTML =
-        "🟠 DRAGON001<br>🟠 DRAGON003";
-
-    }
-
-    else if(codigo === "DRAGON003"){
-
-        document.getElementById("resultado").innerHTML =
-        "🎉 Encontraste la Esfera 3";
-
-        document.getElementById("esferas").innerHTML =
-        "🟠 DRAGON001<br>🟠 DRAGON002";
-
-    }
-
-    else{
-
-        document.getElementById("resultado").innerHTML =
-        "❌ Código incorrecto";
-
-    }
-
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+maxZoom:19
 }
+).addTo(map);
+
+L.marker([-17.9833,-67.1500]).addTo(map)
+.bindPopup("🐉 Esfera 1");
+
+L.marker([-17.9780,-67.1450]).addTo(map)
+.bindPopup("🐉 Esfera 2");
+
+L.marker([-17.9750,-67.1550]).addTo(map)
+.bindPopup("🐉 Esfera 3");
+
+L.marker([-17.9700,-67.1600]).addTo(map)
+.bindPopup("🐉 Esfera 4");
+
+L.marker([-17.9900,-67.1400]).addTo(map)
+.bindPopup("🐉 Esfera 5");
+
+L.marker([-17.9950,-67.1550]).addTo(map)
+.bindPopup("🐉 Esfera 6");
+
+L.marker([-17.9850,-67.1650]).addTo(map)
+.bindPopup("🐉 Esfera 7");
 
 </script>
 
 </body>
-
 </html>
