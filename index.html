@@ -87,6 +87,11 @@ button:hover {
   box-shadow: 0 0 15px red;
 }
 
+.ranking-panel p {
+  margin: 8px 0;
+  font-size: 18px;
+}
+
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
@@ -96,35 +101,34 @@ button:hover {
 <body>
 
 <h1 class="titulo">
-🐉RADAR DEL DRAGÓN POR FERNANDO DAEBOT🐉
+🐉 RADAR DEL DRAGÓN POR FERNANDO DAEBOT 🐉
 </h1>
 
 <div class="paneles">
 
   <div class="patrocinio">
 
-    <img
-    src="https://wallpapers.com/images/featured/dragon-radar-1x8sy1stb5gow51j.jpg">
+    <img src="https://wallpapers.com/images/featured/dragon-radar-1x8sy1stb5gow51j.jpg">
 
   </div>
 
   <div>
 
     <input
-    id="jugador"
-    placeholder="Tu nombre">
+      id="jugador"
+      placeholder="Tu nombre">
 
     <br>
 
     <input
-    id="celular"
-    placeholder="Celular">
+      id="celular"
+      placeholder="Celular">
 
     <br>
 
     <input
-    id="codigoManual"
-    placeholder="Código encontrado">
+      id="codigoManual"
+      placeholder="Código encontrado">
 
     <br>
 
@@ -139,7 +143,7 @@ button:hover {
     <h2>🏆 TOP JUGADORES</h2>
 
     <div id="ranking">
-      Próximamente...
+      Cargando...
     </div>
 
   </div>
@@ -154,7 +158,10 @@ button:hover {
 
 window.onload = function() {
 
-  let map = L.map('map').setView([-17.9833, -67.1500], 13);
+  const map = L.map('map').setView(
+    [-17.9833, -67.1500],
+    13
+  );
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -163,40 +170,10 @@ window.onload = function() {
     }
   ).addTo(map);
 
-  let marcadores = {};
+  const marcadores = {};
 
   function cargarEntradas() {
-function cargarRanking() {
 
-  fetch(
-    "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=ranking"
-  )
-
-  .then(res => res.json())
-
-  .then(data => {
-
-    let html = "";
-
-    data.slice(0,10).forEach((jugador,index) => {
-
-      html +=
-      "<p>" +
-      (index + 1) +
-      ". " +
-      jugador.nombre +
-      " - " +
-      jugador.puntos +
-      " pts</p>";
-
-    });
-
-    document.getElementById("ranking").innerHTML =
-    html;
-
-  });
-
-}
     fetch(
       "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=listar"
     )
@@ -207,14 +184,13 @@ function cargarRanking() {
 
       data.forEach(ent => {
 
-        let clownIcon = L.divIcon({
-          html:
-          "<div style='font-size:40px;'>🎪</div>",
+        const clownIcon = L.divIcon({
+          html: "<div style='font-size:40px;'>🎪</div>",
           className: "emoji-marker",
           iconSize: [60,60]
         });
 
-        let marker = L.marker(
+        const marker = L.marker(
           [
             parseFloat(ent.latitud),
             parseFloat(ent.longitud)
@@ -234,20 +210,73 @@ function cargarRanking() {
 
       });
 
+    })
+
+    .catch(error => {
+
+      console.error(
+        "Error cargando entradas:",
+        error
+      );
+
+    });
+
+  }
+
+  function cargarRanking() {
+
+    fetch(
+      "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=ranking"
+    )
+
+    .then(res => res.json())
+
+    .then(data => {
+
+      let html = "";
+
+      data
+      .slice(0,10)
+      .forEach((jugador,index) => {
+
+        html +=
+          "<p><b>" +
+          (index + 1) +
+          ".</b> " +
+          jugador.nombre +
+          " - " +
+          jugador.puntos +
+          " pts</p>";
+
+      });
+
+      document
+      .getElementById("ranking")
+      .innerHTML = html;
+
+    })
+
+    .catch(error => {
+
+      console.error(
+        "Error cargando ranking:",
+        error
+      );
+
     });
 
   }
 
   window.validarManual = function() {
 
-    let nombre =
-    document.getElementById("jugador").value;
+    const nombre =
+      document.getElementById("jugador").value;
 
-    let codigo =
-    document.getElementById("codigoManual").value;
+    const codigo =
+      document.getElementById("codigoManual").value;
 
-    let celular =
-    document.getElementById("celular").value;
+    const celular =
+      document.getElementById("celular").value;
 
     fetch(
       "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec",
@@ -280,6 +309,8 @@ function cargarRanking() {
 
         }
 
+        cargarRanking();
+
         alert(
           "🎉 +" +
           resp.puntos +
@@ -304,10 +335,15 @@ function cargarRanking() {
 
     });
 
-  }
+  };
 
-cargarEntradas();
-cargarRanking();
+  cargarEntradas();
+  cargarRanking();
+
+  setInterval(
+    cargarRanking,
+    15000
+  );
 
 };
 
