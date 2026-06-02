@@ -166,7 +166,37 @@ window.onload = function() {
   let marcadores = {};
 
   function cargarEntradas() {
+function cargarRanking() {
 
+  fetch(
+    "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=ranking"
+  )
+
+  .then(res => res.json())
+
+  .then(data => {
+
+    let html = "";
+
+    data.slice(0,10).forEach((jugador,index) => {
+
+      html +=
+      "<p>" +
+      (index + 1) +
+      ". " +
+      jugador.nombre +
+      " - " +
+      jugador.puntos +
+      " pts</p>";
+
+    });
+
+    document.getElementById("ranking").innerHTML =
+    html;
+
+  });
+
+}
     fetch(
       "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=listar"
     )
@@ -276,7 +306,8 @@ window.onload = function() {
 
   }
 
-  cargarEntradas();
+cargarEntradas();
+cargarRanking();
 
 };
 
