@@ -1,8 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<style>
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #111;
+  color: white;
+  text-align: center;
+}
+
+#map {
+  height: 600px;
+  width: 95%;
+  margin: auto;
+  border: 4px solid red;
+  border-radius: 10px;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+</head>
+
+<body>
+
+<h2>RADAR DEL DRAGÓN</h2>
+
 <div id="map"></div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
+
+window.onload = function() {
 
 let map = L.map('map').setView([-17.9833, -67.1500], 13);
 
@@ -37,14 +73,9 @@ function cargarEntradas() {
 
 }
 
-function abrirValidacion(codigo) {
+window.abrirValidacion = function(codigo) {
 
-  let nombre = document.getElementById("jugador").value;
-
-  if (!nombre) {
-    alert("Escribe tu nombre primero");
-    return;
-  }
+  let nombre = document.getElementById("jugador")?.value || "web";
 
   fetch("https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec", {
     method: "POST",
@@ -59,28 +90,21 @@ function abrirValidacion(codigo) {
   .then(resp => {
 
     if (resp.estado === "ok") {
-
       map.removeLayer(marcadores[codigo]);
-
-      document.getElementById("resultado").innerHTML =
-        "🎉 +" + resp.puntos + " puntos";
-
-    } else if (resp.estado === "usada") {
-
-      document.getElementById("resultado").innerHTML =
-        "⚠️ Ya usada";
-
+      alert("🎉 +" + resp.puntos + " puntos");
     } else {
-
-      document.getElementById("resultado").innerHTML =
-        "❌ Código inválido";
-
+      alert("❌ Error o ya usada");
     }
 
   });
 
-}
+};
 
 cargarEntradas();
 
+};
+
 </script>
+
+</body>
+</html>
