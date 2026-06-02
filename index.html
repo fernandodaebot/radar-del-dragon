@@ -62,9 +62,15 @@ function cargarEntradas() {
   iconAnchor: [20, 40]
 });
 
+let clownIcon = L.divIcon({
+  html: "🎪",
+  className: "emoji-marker",
+  iconSize: [30, 30]
+});
+
 let marker = L.marker(
-  [ent.latitud, ent.longitud],
-  { icon: carpaIcon }
+  [parseFloat(ent.latitud), parseFloat(ent.longitud)],
+  { icon: clownIcon }
 ).addTo(map);
 
         marker.bindPopup(`
