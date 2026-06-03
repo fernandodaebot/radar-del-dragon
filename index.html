@@ -164,15 +164,21 @@ window.onload = function() {
     [-17.9833, -67.1500],
     13
   );
-  const musica =
-document.getElementById("musicaFondo");
+document.addEventListener(
+  "click",
+  function() {
 
-map.once("click", function() {
+    const musica =
+    document.getElementById("musicaFondo");
 
-  musica.play()
-  .catch(() => {});
+    musica.play()
+    .catch(error => {
+      console.log(error);
+    });
 
-});
+  },
+  { once: true }
+);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
