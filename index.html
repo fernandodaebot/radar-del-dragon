@@ -365,9 +365,7 @@ const estrellaIcon = L.divIcon({
   }
 );
 
-if (map.getZoom() >= zoomMinimo) {
-  marker.addTo(map);
-}
+marker.addTo(map);
   marker.bindPopup(
   "<h3>⭐ ESTRELLA</h3>" +
   "<p><b>Código:</b> " +
