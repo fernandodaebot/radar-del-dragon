@@ -256,7 +256,7 @@ document.addEventListener(
   ).addTo(map);
 
   const marcadores = {};
-
+let tiempoRestante = 0;
   function cargarEntradas() {
 
     fetch(
@@ -307,7 +307,7 @@ document.addEventListener(
     });
 
   }
-
+let tiempoRestante = 0;
   function cargarEstrellas() {
 
   fetch(
@@ -319,7 +319,7 @@ document.addEventListener(
     console.log(data);
 if(data.length > 0){
 
-  let segundos =
+  tiempoRestante =
   data[0].restante;
 
   let minutos =
@@ -382,6 +382,7 @@ if(data.length > 0){
   });
 
 }
+  let tiempoRestante = 0;
   function cargarRanking() {
 
     fetch(
@@ -504,6 +505,28 @@ cargarEstrellas();
     cargarRanking,
     15000
   );
+  setInterval(function(){
+
+  if(tiempoRestante > 0){
+
+    tiempoRestante--;
+
+    let minutos =
+    Math.floor(tiempoRestante / 60);
+
+    let segundos =
+    tiempoRestante % 60;
+
+    document
+    .getElementById("relojGlobal")
+    .innerHTML =
+    String(minutos).padStart(2,"0")
+    + ":" +
+    String(segundos).padStart(2,"0");
+
+  }
+
+},1000);
   setInterval(
   cargarEstrellas,
   1000
