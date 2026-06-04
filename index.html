@@ -519,24 +519,77 @@ cargarEstrellas();
   );
   setInterval(function(){
 
-  if(tiempoRestante > 0){
+  fetch(
+    "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=proxima"
+  )
 
-    tiempoRestante--;
+  .then(res => res.json())
+
+  .then(data => {
+
+    let ahora = new Date();
+
+    let siguiente =
+    new Date();
+
+    siguiente.setHours(
+      data.siguienteGeneracion
+    );
+
+    siguiente.setMinutes(0);
+    siguiente.setSeconds(0);
+
+    if(
+      data.siguienteGeneracion
+      <=
+      data.horaActual
+    ){
+      siguiente.setDate(
+        siguiente.getDate() + 1
+      );
+    }
+
+    let diferencia =
+    Math.floor(
+      (
+        siguiente.getTime()
+        -
+        ahora.getTime()
+      ) / 1000
+    );
+
+    let horas =
+    Math.floor(
+      diferencia / 3600
+    );
 
     let minutos =
-    Math.floor(tiempoRestante / 60);
+    Math.floor(
+      (diferencia % 3600)
+      / 60
+    );
 
     let segundos =
-    tiempoRestante % 60;
+    diferencia % 60;
+
+    document
+    .getElementById("tituloReloj")
+    .innerHTML =
+    "⏰ PRÓXIMA ESTRELLA";
 
     document
     .getElementById("relojGlobal")
     .innerHTML =
-    String(minutos).padStart(2,"0")
+    String(horas)
+    .padStart(2,"0")
     + ":" +
-    String(segundos).padStart(2,"0");
+    String(minutos)
+    .padStart(2,"0")
+    + ":" +
+    String(segundos)
+    .padStart(2,"0");
 
-  }
+  });
 
 },1000);
   setInterval(
