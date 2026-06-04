@@ -317,7 +317,26 @@ document.addEventListener(
   .then(res => res.json())
 
   .then(data => {
+if(data.length > 0){
 
+  let segundos =
+  data[0].restante;
+
+  let minutos =
+  Math.floor(segundos / 60);
+
+  let seg =
+  segundos % 60;
+
+  document
+  .getElementById("relojGlobal")
+  .innerHTML =
+  String(minutos).padStart(2,"0")
+  + ":" +
+  String(seg).padStart(2,"0");
+
+}
+    
     let html = "";
 
     data.forEach(estrella => {
@@ -487,7 +506,7 @@ cargarEstrellas();
   );
   setInterval(
   cargarEstrellas,
-  15000
+  1000
 );
 
 };
