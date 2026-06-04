@@ -308,36 +308,16 @@ let tiempoRestante = 0;
 
   }
 
-  function cargarEstrellas() {
+function cargarEstrellas() {
 
   fetch(
-"https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=estadoEstrellas"  )
+    "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=estadoEstrellas"
+  )
 
   .then(res => res.json())
 
   .then(data => {
-    console.log(data);
-if(data.length > 0){
 
-  tiempoRestante =
-  data[0].restante;
-  console.log("Tiempo recibido:", data[0].restante);
-
-  let minutos =
-  Math.floor(tiempoRestante / 60);
-
-  let seg =
-  tiempoRestante % 60;
-
-  document
-  .getElementById("relojGlobal")
-  .innerHTML =
-  String(minutos).padStart(2,"0")
-  + ":" +
-  String(seg).padStart(2,"0");
-
-}
-    
     let html = "";
 
     data.forEach(estrella => {
@@ -350,28 +330,27 @@ if(data.length > 0){
       if (estrella.tipo == "LEGENDARIA")
         icono = "🦷";
 
-      let pais =
-      estrella.pais || "???";
+      let ciudad = "???";
 
-      let ciudad =
-      estrella.etapa >= 2
-      ? estrella.ciudad
-      : "???";
+      if (estrella.ciudadVisible) {
+        ciudad = estrella.ciudad;
+      }
 
-      let pista =
-      estrella.etapa >= 3
-      ? estrella.pista
-      : "???";
+      let estadoVisual = "🔍 BUSCANDO";
+
+      if (estrella.visible) {
+        estadoVisual = "⭐ VISIBLE";
+      }
 
       html +=
       "<div class='fila-estrella'>" +
       icono +
       " 🌎 " +
-      pais +
+      estrella.pais +
       " | 🏙️ " +
       ciudad +
-      " | 📍 " +
-      pista +
+      " | " +
+      estadoVisual +
       "</div>";
 
     });
