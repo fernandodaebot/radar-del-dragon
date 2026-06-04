@@ -328,19 +328,7 @@ function cargarEstrellas() {
   !estrellasMapa[estrella.codigo]
 ) {
 
-       let zoomMinimo = 19;
-
-if (estrella.visible) {
-  zoomMinimo = 13;
-}
-
-if (
-  map.getZoom()
-  <
-  zoomMinimo
-) {
-  return;
-}
+      // temporalmente sin filtro de zoom
 
   let tamano = 10;
 
@@ -392,7 +380,7 @@ if (map.getZoom() >= zoomMinimo) {
   estrellasMapa[
     estrella.codigo
   ] = marker;
-       map.on("zoomend", function() {
+      
 
   let zoomActual =
   map.getZoom();
