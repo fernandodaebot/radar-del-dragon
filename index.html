@@ -141,7 +141,7 @@ button:hover {
 <body>
 
 <h1 class="titulo">
-🐉RADAR DEL DRAGÓN D FERNANDO DAEBOT🐉
+🐉RADAR DEL DRAGÓN DE FERNANDO DAEBOT🐉
 </h1>
 
 <div class="paneles">
@@ -257,9 +257,6 @@ document.addEventListener(
     }
   ).addTo(map);
 
-  const marcadores = {};
-  const estrellasMapa = {};
-let tiempoRestante = 0;
   function cargarEntradas() {
 
     fetch(
@@ -595,13 +592,16 @@ map.on("zoomend", function() {
     let siguiente =
 new Date(data.proxima);
     let diferencia =
-    Math.floor(
-      (
-        siguiente.getTime()
-        -
-        ahora.getTime()
-      ) / 1000
-    );
+Math.max(
+  0,
+  Math.floor(
+    (
+      siguiente.getTime()
+      -
+      ahora.getTime()
+    ) / 1000
+  )
+);
 
     let horas =
     Math.floor(
