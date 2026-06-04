@@ -307,7 +307,7 @@ let tiempoRestante = 0;
     });
 
   }
-let tiempoRestante = 0;
+
   function cargarEstrellas() {
 
   fetch(
@@ -326,7 +326,7 @@ if(data.length > 0){
   Math.floor(segundos / 60);
 
   let seg =
-  segundos % 60;
+  tiempoRestante % 60;
 
   document
   .getElementById("relojGlobal")
@@ -382,7 +382,6 @@ if(data.length > 0){
   });
 
 }
-  let tiempoRestante = 0;
   function cargarRanking() {
 
     fetch(
@@ -529,7 +528,7 @@ cargarEstrellas();
 },1000);
   setInterval(
   cargarEstrellas,
-  1000
+  15000
 );
 
 };
