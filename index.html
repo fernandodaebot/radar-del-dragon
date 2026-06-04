@@ -141,7 +141,7 @@ button:hover {
 <body>
 
 <h1 class="titulo">
-🐉RADAR DEL DRAGÓN D FERNANDO DAEBOT🐉
+🐉RADAR DEL DRAGÓN DE FERNANDO DAEBOT🐉
 </h1>
 
 <div class="paneles">
@@ -329,7 +329,15 @@ function cargarEstrellas() {
 ) {
 
       // temporalmente sin filtro de zoom
+let tamano = 22;
 
+if (estrella.ciudadVisible) {
+  tamano = 30;
+}
+
+if (estrella.visible) {
+  tamano = 40;
+}
 const estrellaIcon = L.divIcon({
   html:
   "<div style='font-size:" +
