@@ -91,6 +91,43 @@ button:hover {
   margin: 8px 0;
   font-size: 18px;
 }
+  .panel-estrellas {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin: 25px;
+}
+
+.busquedas-panel {
+  width: 700px;
+  background: #222;
+  border: 3px solid gold;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 0 15px gold;
+}
+
+.reloj-panel {
+  width: 250px;
+  background: #222;
+  border: 3px solid red;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 0 15px red;
+}
+
+#relojGlobal {
+  font-size: 50px;
+  color: gold;
+  font-weight: bold;
+}
+
+.fila-estrella {
+  margin: 8px;
+  padding: 8px;
+  border-bottom: 1px solid #555;
+  font-size: 18px;
+}
 
 </style>
 
@@ -144,6 +181,34 @@ button:hover {
 
     <div id="ranking">
       Cargando...
+    </div>
+
+  </div>
+
+</div>
+
+<div class="panel-estrellas">
+
+  <div class="busquedas-panel">
+
+    <h2>⭐ BÚSQUEDAS ACTIVAS ⭐</h2>
+
+    <div id="listaEstrellas">
+
+      Cargando búsquedas...
+
+    </div>
+
+  </div>
+
+  <div class="reloj-panel">
+
+    <h2>⏰ SIGUIENTE PISTA</h2>
+
+    <div id="relojGlobal">
+
+      15:00
+
     </div>
 
   </div>
@@ -240,6 +305,61 @@ document.addEventListener(
 
   }
 
+  function cargarEstrellas() {
+
+  fetch(
+    "https://script.google.com/macros/s/AKfycbyDpDviz_a9DOrTrpzOvgY5panW1bZ-g_5o59lsgd4D0TFB60TEm1_w5ZCgLQJUxLAG0w/exec?accion=estrellas"
+  )
+
+  .then(res => res.json())
+
+  .then(data => {
+
+    let html = "";
+
+    data.forEach(estrella => {
+
+      let icono = "🎪";
+
+      if (estrella.tipo == "RARA")
+        icono = "🎭";
+
+      if (estrella.tipo == "LEGENDARIA")
+        icono = "🦷";
+
+      let pais =
+      estrella.pais || "???";
+
+      let ciudad =
+      estrella.etapa >= 2
+      ? estrella.ciudad
+      : "???";
+
+      let pista =
+      estrella.etapa >= 3
+      ? estrella.pista
+      : "???";
+
+      html +=
+      "<div class='fila-estrella'>" +
+      icono +
+      " 🌎 " +
+      pais +
+      " | 🏙️ " +
+      ciudad +
+      " | 📍 " +
+      pista +
+      "</div>";
+
+    });
+
+    document
+    .getElementById("listaEstrellas")
+    .innerHTML = html;
+
+  });
+
+}
   function cargarRanking() {
 
     fetch(
@@ -354,13 +474,18 @@ document.addEventListener(
 
   };
 
-  cargarEntradas();
-  cargarRanking();
+cargarEntradas();
+cargarRanking();
+cargarEstrellas();
 
   setInterval(
     cargarRanking,
     15000
   );
+  setInterval(
+  cargarEstrellas,
+  15000
+);
 
 };
 
