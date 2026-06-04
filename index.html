@@ -328,6 +328,20 @@ function cargarEstrellas() {
   !estrellasMapa[estrella.codigo]
 ) {
 
+       let zoomMinimo = 19;
+
+if (estrella.visible) {
+  zoomMinimo = 13;
+}
+
+if (
+  map.getZoom()
+  <
+  zoomMinimo
+) {
+  return;
+}
+
   let tamano = 10;
 
 if (estrella.visible) {
