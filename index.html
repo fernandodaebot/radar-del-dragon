@@ -603,7 +603,16 @@ Math.max(
     ) / 1000
   )
 );
+if (diferencia <= 0) {
 
+  document
+  .getElementById("relojGlobal")
+  .innerHTML =
+  "⭐ GENERANDO...";
+
+  return;
+
+}
     let horas =
     Math.floor(
       diferencia / 3600
