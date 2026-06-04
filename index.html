@@ -593,25 +593,7 @@ map.on("zoomend", function() {
     let ahora = new Date();
 
     let siguiente =
-    new Date();
-
-    siguiente.setHours(
-      data.proxima
-    );
-
-    siguiente.setMinutes(0);
-    siguiente.setSeconds(0);
-
-    if(
-      data.siguienteGeneracion
-      <=
-      data.horaActual
-    ){
-      siguiente.setDate(
-        siguiente.getDate() + 1
-      );
-    }
-
+new Date(data.proxima);
     let diferencia =
     Math.floor(
       (
