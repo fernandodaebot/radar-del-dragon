@@ -329,8 +329,8 @@ function cargarEstrellas() {
 ) {
 
       // temporalmente sin filtro de zoom
-let tamano = 4;
-let zoomMinimo = 18;
+let tamano = 8;
+let zoomMinimo = 17;
 
 if (estrella.ciudadVisible) {
   tamano = 18;
@@ -343,7 +343,9 @@ if (estrella.visible) {
 }
 const estrellaIcon = L.divIcon({
 html:
-"<div style='font-size:4px;'>🔴</div>",
+"<div style='font-size:" +
+tamano +
+"px;'>⭐</div>",
 
   className: "emoji-marker",
 
