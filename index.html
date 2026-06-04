@@ -319,7 +319,7 @@ function cargarEstrellas() {
   .then(data => {
 
     let html = "";
-
+data.reverse();
     data.forEach(estrella => {
      if (
   !estrellasMapa[estrella.codigo]
