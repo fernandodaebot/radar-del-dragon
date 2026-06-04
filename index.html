@@ -206,15 +206,21 @@ button:hover {
 
   <div class="reloj-panel">
 
-  <h2 id="tituloReloj">
-    ⭐ RADAR ACTIVO
-  </h2>
+<h2 id="tituloReloj">
+  🐉 RADAR DEL DRAGÓN
+</h2>
 
-  <div id="relojGlobal">
+<div style="
+font-size:18px;
+color:gold;
+margin-bottom:10px;
+">
+Próxima aparición de esfera
+</div>
 
-      15:00
-
-    </div>
+<div id="relojGlobal">
+  15:00
+</div>
 
   </div>
 
@@ -605,10 +611,10 @@ Math.max(
 );
 if (diferencia <= 0) {
 
-  document
-  .getElementById("relojGlobal")
-  .innerHTML =
-  "⭐ GENERANDO...";
+document
+.getElementById("relojGlobal")
+.innerHTML =
+"<span style='font-size:24px'>✨ MATERIALIZANDO ESFERA...</span>";
 
   return;
 
