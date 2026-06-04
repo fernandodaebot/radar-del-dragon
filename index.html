@@ -353,17 +353,25 @@ html:
   ]
 });
 
-  const marker = L.marker(
-  [
-    parseFloat(estrella.latitud),
-    parseFloat(estrella.longitud)
-  ],
-  {
-    icon: estrellaIcon
-  }
+const marker = L.marker(
+[
+  parseFloat(estrella.latitud),
+  parseFloat(estrella.longitud)
+],
+{
+  icon: estrellaIcon
+}
 );
 
-marker.addTo(map);
+marker.zoomMinimo = zoomMinimo;
+
+if (
+  map.getZoom()
+  >=
+  marker.zoomMinimo
+) {
+  marker.addTo(map);
+}
   marker.bindPopup(
   "<h3>⭐ ESTRELLA</h3>" +
   "<p><b>Código:</b> " +
@@ -535,7 +543,37 @@ marker.addTo(map);
 cargarEntradas();
 cargarRanking();
 cargarEstrellas();
+map.on("zoomend", function() {
 
+  Object.values(estrellasMapa)
+  .forEach(marker => {
+
+    if (
+      map.getZoom()
+      >=
+      marker.zoomMinimo
+    ) {
+
+      if (
+        !map.hasLayer(marker)
+      ) {
+        marker.addTo(map);
+      }
+
+    } else {
+
+      if (
+        map.hasLayer(marker)
+      ) {
+        map.removeLayer(marker);
+      }
+
+    }
+
+  });
+
+});
+  
   setInterval(
     cargarRanking,
     15000
