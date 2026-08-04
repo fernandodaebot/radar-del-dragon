@@ -128,33 +128,32 @@ button:hover {
 
     position:relative;
 
-    width:min(98vw,700px);
+    width:min(98vw,720px);
 
-    aspect-ratio:1/1;
+    aspect-ratio:1;
 
     margin:80px auto;
 
-}
+    display:flex;
 
+    justify-content:center;
+
+    align-items:center;
+
+}
 #map{
 
-    position:absolute;
+position:absolute;
 
-    left:15%;
+width:74%;
 
-    top:15%;
+height:74%;
 
-    width:70%;
+border-radius:50%;
 
-    height:70%;
+overflow:hidden;
 
-    border-radius:50%;
-
-    overflow:hidden;
-
-    border:none;
-
-    z-index:1;
+z-index:1;
 
 }
   
@@ -162,9 +161,7 @@ button:hover {
 
 position:absolute;
 
-left:0;
-
-top:0;
+inset:0;
 
 width:100%;
 
