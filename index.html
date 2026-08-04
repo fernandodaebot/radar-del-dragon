@@ -143,25 +143,17 @@ button:hover {
     align-items:center;
 
 }
-#map{
+#radarOverlay{
 
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-width:88%;
+    position:absolute;
 
-height:88%;
+    inset:0;
 
-border-radius:50%;
+    z-index:5000;
 
-overflow:hidden;
-
-z-index:1;
+    pointer-events:none;
 
 }
-}
-  
 #map{
 
     position:absolute;
@@ -178,7 +170,28 @@ z-index:1;
 
     overflow:hidden;
 
-    z-index:1;
+    z-index:10;
+
+}
+ #radarFrame{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+}
+  .leaflet-pane{
+
+    z-index:1 !important;
+
+}
+
+.leaflet-top,
+.leaflet-bottom{
+
+    z-index:2 !important;
 
 }
 </style>
@@ -278,9 +291,11 @@ Próxima aparición de esfera
 
 <div id="radar-container">
 
-    <img id="radarFrame" src="RADAR.png" alt="Radar">
-
     <div id="map"></div>
+
+    <div id="radarOverlay">
+        <img id="radarFrame" src="RADAR.png" alt="Radar">
+    </div>
 
 </div>
   
