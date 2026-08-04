@@ -162,19 +162,23 @@ z-index:1;
 }
 }
   
-#radarFrame{
+#map{
 
-position:absolute;
+    position:absolute;
 
-inset:0;
+    left:50%;
+    top:50%;
 
-width:100%;
+    transform:translate(-50%,-50%);
 
-height:100%;
+    width:88%;
+    height:88%;
 
-pointer-events:none;
+    border-radius:50%;
 
-z-index:20;
+    overflow:hidden;
+
+    z-index:1;
 
 }
 </style>
@@ -186,7 +190,7 @@ z-index:20;
 <body>
 
 <h1 class="titulo">
-🐉RADAR DEL DRAGÓN FERNANDO DAEBOT🐉
+🐉RADAR DEL DRAGÓN d FERNANDO DAEBOT🐉
 </h1>
 
 <div class="paneles">
@@ -274,14 +278,13 @@ Próxima aparición de esfera
 
 <div id="radar-container">
 
-    <img
-        id="radarFrame"
-        src="RADAR.png">
+    <img id="radarFrame" src="RADAR.png" alt="Radar">
 
     <div id="map"></div>
 
 </div>
-<audio id="musicaFondo" loop>
+  
+  <audio id="musicaFondo" loop>
  <source src="sonido.mp3" type="audio/mpeg">
 </audio>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
