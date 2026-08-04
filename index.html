@@ -124,32 +124,18 @@ button:hover {
   text-align: left;
 }
 /* ================= RADAR ================= */
+#radar-container{
 
-#map{
+    position:relative;
 
-    position:absolute;
+    width:min(95vw,900px);
 
-    left:13%;
+    aspect-ratio:1/1;
 
-    top:13%;
-
-    width:74%;
-
-    height:74%;
-
-    border-radius:50%;
-
-    overflow:hidden;
+    margin:80px auto 80px auto;
 
 }
 
-#radarFrame{
-
-    width:100%;
-
-    height:100%;
-
-}
 
 #map{
 
@@ -175,19 +161,19 @@ button:hover {
 
 #radarFrame{
 
-    position:absolute;
+position:absolute;
 
-    left:0;
+left:0;
 
-    top:0;
+top:0;
 
-    width:900px;
+width:100%;
 
-    height:900px;
+height:100%;
 
-    pointer-events:none;
+pointer-events:none;
 
-    z-index:20;
+z-index:20;
 
 }
 </style>
@@ -287,11 +273,11 @@ Próxima aparición de esfera
 
 <div id="radar-container">
 
-    <div id="map"></div>
-
     <img
-    id="radarFrame"
-    src="RADAR.png">
+        id="radarFrame"
+        src="RADAR.png">
+
+    <div id="map"></div>
 
 </div>
 <audio id="musicaFondo" loop>
