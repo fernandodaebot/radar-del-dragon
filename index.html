@@ -174,7 +174,7 @@ button:hover {
 <body>
 
 <h1 class="titulo">
-🐉RADAR DEL DRAGÓN FERNANDO DAEBOT🐉
+🐉RADAR DEL DRAGÓN DE FERNANDO DAEBOT🐉
 </h1>
 
 <div class="paneles">
@@ -317,15 +317,15 @@ const estrellasMapa = {};
 
     data.forEach(ent => {
 
-  let tamano = 25;
-let zoomMinimo = 14;
+let tamano = 32;
+let zoomMinimo = 13;
 
 const clownIcon = L.divIcon({
     html: "<div style='font-size:" + tamano + "px;'>🇧🇴</div>",
     className: "",
     iconSize: [tamano, tamano],
     iconAnchor: [tamano/2, tamano/2],
-    popupAnchor: [0, -tamano/2]
+    popupAnchor: [0,-tamano/2]
 });
 
         const marker = L.marker(
@@ -714,7 +714,7 @@ document
    document
 .getElementById("tituloReloj")
 .innerHTML =
-"⭐ RADAR ACTIVO";
+"⏳TIEMPO RESTANTE⏳";
 
     document
     .getElementById("relojGlobal")
