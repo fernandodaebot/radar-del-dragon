@@ -124,64 +124,23 @@ button:hover {
   text-align: left;
 }
 /* ================= RADAR ================= */
-#radar-container{
 
-    position:relative;
-
-    width:100vw;
-
-    max-width:1300px;
-
-    aspect-ratio:1;
-
-    margin:10px auto;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-#radarOverlay{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:5000;
-
-    pointer-events:none;
-
-}
 #map{
 
-    position:absolute;
+    width:95%;
 
-    left:50%;
-    top:50%;
+    height:700px;
 
-    transform:translate(-50%,-50%);
+    margin:20px auto;
 
-    width:88%;
-    height:88%;
-
-    border-radius:50%;
+    border-radius:20px;
 
     overflow:hidden;
 
-    z-index:10;
+    border:4px solid gold;
 
 }
- #radarFrame{
 
-    width:100%;
-
-    height:100%;
-
-    display:block;
-
-}
   .leaflet-pane{
 
     z-index:1 !important;
@@ -289,15 +248,7 @@ Próxima aparición de esfera
 
 </div>
 
-<div id="radar-container">
-
-    <div id="map"></div>
-
-    <div id="radarOverlay">
-        <img id="radarFrame" src="RADAR.png" alt="Radar">
-    </div>
-
-</div>
+<div id="map"></div>
   
   <audio id="musicaFondo" loop>
  <source src="sonido.mp3" type="audio/mpeg">
