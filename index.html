@@ -124,23 +124,64 @@ button:hover {
   text-align: left;
 }
 /* ================= RADAR ================= */
+#radar-container{
 
+    position:relative;
+
+    width:100vw;
+
+    max-width:1300px;
+
+    aspect-ratio:1;
+
+    margin:10px auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+#radarOverlay{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:5000;
+
+    pointer-events:none;
+
+}
 #map{
 
-    width:95%;
+    position:absolute;
 
-    height:700px;
+    left:50%;
+    top:50%;
 
-    margin:20px auto;
+    transform:translate(-50%,-50%);
 
-    border-radius:20px;
+    width:88%;
+    height:88%;
+
+    border-radius:50%;
 
     overflow:hidden;
 
-    border:4px solid gold;
+    z-index:10;
 
 }
+ #radarFrame{
 
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+}
   .leaflet-pane{
 
     z-index:1 !important;
@@ -162,7 +203,7 @@ button:hover {
 <body>
 
 <h1 class="titulo">
-🐉RADAR DEL DRAGÓN DE FERNANDO DAEBOT🐉
+🐉RADAR DEL DRAGÓN D FERNANDO DAEBOT🐉
 </h1>
 
 <div class="paneles">
@@ -248,7 +289,15 @@ Próxima aparición de esfera
 
 </div>
 
-<div id="map"></div>
+<div id="radar-container">
+
+    <div id="map"></div>
+
+    <div id="radarOverlay">
+        <img id="radarFrame" src="RADAR.png" alt="Radar">
+    </div>
+
+</div>
   
   <audio id="musicaFondo" loop>
  <source src="sonido.mp3" type="audio/mpeg">
@@ -299,11 +348,11 @@ const estrellasMapa = {};
 
       data.forEach(ent => {
 
-       const clownIcon = L.divIcon({
-    html: "<div style='font-size:34px;'>🇧🇴</div>",
-    className: "emoji-marker",
-    iconSize: [40,40]
-});
+        const clownIcon = L.divIcon({
+          html: "<div style='font-size:40px;'>🎪</div>",
+          className: "emoji-marker",
+          iconSize: [60,60]
+        });
 
         const marker = L.marker(
           [
@@ -315,28 +364,11 @@ const estrellasMapa = {};
           }
         ).addTo(map);
 
-let estadoVisual =
-(ent.estado === "DISPONIBLE")
-? "🟢 DISPONIBLE"
-: "🔴 RECLAMADA";
-
-marker.bindPopup(`
-<div style="max-width:280px; font-family:Arial;">
-
-<h2 style="margin:0;">🇧🇴 ${ent.nombre}</h2>
-
-<p style="margin-top:10px;">
-${ent.descripcion || ""}
-</p>
-
-<hr>
-
-<p><b>Estado:</b> ${estadoVisual}</p>
-
-<p><b>Código:</b> ${ent.codigo}</p>
-
-</div>
-`);
+        marker.bindPopup(`
+          <h3>🎪 ${ent.nombre}</h3>
+          <p>Puntos: ${ent.puntos}</p>
+          <p>Tipo: ${ent.tipo}</p>
+        `);
 
         marcadores[ent.codigo] = marker;
 
@@ -548,23 +580,18 @@ console.log("HTML:", html);
 
     .then(resp => {
 
-     if (resp.estado === "ok") {
+      if (resp.estado === "ok") {
 
-    // Borrar todos los marcadores antiguos
-    Object.values(marcadores).forEach(marker=>{
-        map.removeLayer(marker);
-    });
+        if (marcadores[codigo]) {
 
-    for(let k in marcadores){
-        delete marcadores[k];
-    }
+          map.removeLayer(
+            marcadores[codigo]
+          );
 
-    // Volver a cargar desde Apps Script
-    cargarEntradas();
+        }
 
-    // Actualizar ranking
-    cargarRanking();
-       
+        cargarRanking();
+
         alert(
           "🎉 +" +
           resp.puntos +
