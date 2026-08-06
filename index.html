@@ -315,23 +315,23 @@ const estrellasMapa = {};
           }
         ).addTo(map);
 
-    let estadoVisual =
-ent.estado == "DISPONIBLE"
-?
-"🟢 DISPONIBLE"
-:
-"🔴 RECLAMADA";
+let estadoVisual =
+(ent.estado === "DISPONIBLE")
+? "🟢 DISPONIBLE"
+: "🔴 RECLAMADA";
 
 marker.bindPopup(`
-<div style="max-width:260px">
+<div style="max-width:280px; font-family:Arial;">
 
-<h2>🇧🇴 ${ent.nombre}</h2>
+<h2 style="margin:0;">🇧🇴 ${ent.nombre}</h2>
 
-<p>${ent.descripcion}</p>
+<p style="margin-top:10px;">
+${ent.descripcion || ""}
+</p>
 
 <hr>
 
-<p><b>${estadoVisual}</b></p>
+<p><b>Estado:</b> ${estadoVisual}</p>
 
 <p><b>Código:</b> ${ent.codigo}</p>
 
