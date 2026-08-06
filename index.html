@@ -315,14 +315,27 @@ const estrellasMapa = {};
           }
         ).addTo(map);
 
-       marker.bindPopup(`
+    let estadoVisual =
+ent.estado == "DISPONIBLE"
+?
+"🟢 DISPONIBLE"
+:
+"🔴 RECLAMADA";
+
+marker.bindPopup(`
+<div style="max-width:260px">
+
 <h2>🇧🇴 ${ent.nombre}</h2>
 
-<p><b>Estado:</b> 🟢 Disponible</p>
+<p>${ent.descripcion}</p>
+
+<hr>
+
+<p><b>${estadoVisual}</b></p>
 
 <p><b>Código:</b> ${ent.codigo}</p>
 
-<p>🏆 Al reclamar este lugar obtienes <b>1 punto</b>.</p>
+</div>
 `);
 
         marcadores[ent.codigo] = marker;
@@ -535,18 +548,23 @@ console.log("HTML:", html);
 
     .then(resp => {
 
-      if (resp.estado === "ok") {
+     if (resp.estado === "ok") {
 
-        if (marcadores[codigo]) {
+    // Borrar todos los marcadores antiguos
+    Object.values(marcadores).forEach(marker=>{
+        map.removeLayer(marker);
+    });
 
-          map.removeLayer(
-            marcadores[codigo]
-          );
+    for(let k in marcadores){
+        delete marcadores[k];
+    }
 
-        }
+    // Volver a cargar desde Apps Script
+    cargarEntradas();
 
-        cargarRanking();
-
+    // Actualizar ranking
+    cargarRanking();
+       
         alert(
           "🎉 +" +
           resp.puntos +
