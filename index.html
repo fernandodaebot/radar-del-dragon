@@ -174,7 +174,7 @@ button:hover {
 <body>
 
 <h1 class="titulo">
-🐉RADAR DEL DRAGÓN D FERNANDO DAEBOT🐉
+🐉RADAR DEL DRAGÓN FERNANDO DAEBOT🐉
 </h1>
 
 <div class="paneles">
@@ -317,15 +317,15 @@ const estrellasMapa = {};
 
     data.forEach(ent => {
 
-      let tamano = 25;
+  let tamano = 25;
 let zoomMinimo = 14;
 
 const clownIcon = L.divIcon({
-    html: "<div style='font-size:80px;'>🇧🇴</div>",
+    html: "<div style='font-size:" + tamano + "px;'>🇧🇴</div>",
     className: "",
-    iconSize: [80,80],
-    iconAnchor: [40,40],
-    popupAnchor: [0,-40]
+    iconSize: [tamano, tamano],
+    iconAnchor: [tamano/2, tamano/2],
+    popupAnchor: [0, -tamano/2]
 });
 
         const marker = L.marker(
