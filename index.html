@@ -203,7 +203,7 @@ button:hover {
 <body>
 
 <h1 class="titulo">
-🐉RADAR DEL DRAGÓN DE FERNANDO DAEBOT🐉
+🐉RADAR DEL DRAGÓN D FERNANDO DAEBOT🐉
 </h1>
 
 <div class="paneles">
@@ -344,11 +344,14 @@ const estrellasMapa = {};
 
       data.forEach(ent => {
 
-        const clownIcon = L.divIcon({
-          html: "<div style='font-size:40px;'>🎪</div>",
-          className: "emoji-marker",
-          iconSize: [60,60]
-        });
+      let tamano = 25;
+let zoomMinimo = 14;
+
+const clownIcon = L.divIcon({
+    html: "<div style='font-size:" + tamano + "px;'>🇧🇴</div>",
+    className: "emoji-marker",
+    iconSize: [tamano, tamano]
+});
 
         const marker = L.marker(
           [
@@ -359,8 +362,12 @@ const estrellasMapa = {};
             icon: clownIcon
           }
         ).addTo(map);
+marker.zoomMinimo = zoomMinimo;
 
-        mlet estadoVisual =
+if (map.getZoom() < marker.zoomMinimo) {
+    map.removeLayer(marker);
+}
+       let estadoVisual =
 (ent.estado === "DISPONIBLE")
 ? "🟢 DISPONIBLE"
 : "🔴 RECLAMADA";
