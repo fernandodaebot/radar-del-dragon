@@ -203,7 +203,7 @@ button:hover {
 <body>
 
 <h1 class="titulo">
-🐉RADAR DEL DRAGÓN D FERNANDO DAEBOT🐉
+🐉RADAR DEL DRAGÓN FERNANDO DAEBOT🐉
 </h1>
 
 <div class="paneles">
@@ -364,12 +364,20 @@ const estrellasMapa = {};
           }
         ).addTo(map);
 
-        marker.bindPopup(`
-          <h3>🎪 ${ent.nombre}</h3>
-          <p>Puntos: ${ent.puntos}</p>
-          <p>Tipo: ${ent.tipo}</p>
-        `);
+        mlet estadoVisual =
+(ent.estado === "DISPONIBLE")
+? "🟢 DISPONIBLE"
+: "🔴 RECLAMADA";
 
+marker.bindPopup(`
+<h3>🇧🇴 ${ent.nombre}</h3>
+
+<p>${ent.descripcion || ""}</p>
+
+<p><b>Estado:</b> ${estadoVisual}</p>
+
+<p><b>Código:</b> ${ent.codigo}</p>
+`);
         marcadores[ent.codigo] = marker;
 
       });
