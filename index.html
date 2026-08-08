@@ -64,8 +64,11 @@ button:hover {
   border: 3px solid gold;
   border-radius: 15px;
   padding: 15px;
-  min-height: 300px;
+  height: 420px;
   box-shadow: 0 0 15px gold;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .ranking-panel h2 {
@@ -219,11 +222,10 @@ button:hover {
     <h2>🏆 TOP JUGADORES</h2>
 
     <div id="ranking">
-      Cargando...
+        Cargando...
     </div>
 
-  </div>
-
+</div>
 </div>
 
 <div class="panel-estrellas">
@@ -511,9 +513,7 @@ console.log("HTML:", html);
 
       let html = "";
 
-      data
-      .slice(0,10)
-      .forEach((jugador,index) => {
+      data.forEach((jugador,index) => {
 
         html +=
           "<p><b>" +
